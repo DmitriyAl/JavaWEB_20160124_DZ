@@ -1,0 +1,60 @@
+@startuml
+
+interface WeatherChangingListener {
+updateReadings()
+}
+
+interface WeatherChangingSubject{
+addWeatherChangingListener()
+removeWeatherChangingListener()
+notifyWeatherChangingListeners()
+}
+
+interface DisplayElement{
+display()
+}
+
+class WeatherData{
+ArrayList<WeatherChangingListener> listeners
+
+getTemperature()
+getHumidity()
+getPressure()
+measurementsChanged()
+
+addWeatherChangingListener()
+removeWeatherChangingListener()
+notifyWeatherChangingListeners()
+}
+
+WeatherChangingSubject <|... WeatherData
+
+class CurrentStateDisplay{
+updateReadings()
+display()
+}
+
+class StatisticDisplay{
+updateReadings()
+display()
+}
+
+class ForecastDisplay{
+updateReadings()
+display()
+}
+
+class SomeOtherDisplay{
+updateReadings()
+display()
+}
+
+WeatherChangingListener <|... CurrentStateDisplay
+WeatherChangingListener <|... StatisticDisplay
+WeatherChangingListener <|... ForecastDisplay
+WeatherChangingListener <|... SomeOtherDisplay
+DisplayElement <|... CurrentStateDisplay
+DisplayElement <|... StatisticDisplay
+DisplayElement <|... ForecastDisplay
+DisplayElement <|... SomeOtherDisplay
+@enduml
